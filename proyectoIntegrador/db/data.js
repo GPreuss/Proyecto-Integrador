@@ -1,12 +1,11 @@
 let data = {
     usuario: {
-        nombre: "",
-        DNI: "",
-        email: "",
-        contrasena: "",
-        fechaNac: "",
-        fotoPerfil: "",
-
+        nombre: "Gonzalo Preuss",
+        DNI: "43083711",
+        email: "chopru@hotmail.com",
+        contrasena: "0123456789",
+        fechaNac: "29/03/2001",
+        fotoPerfil: "/images/users/default-image.png",
     },
     productos: [
         {
@@ -99,7 +98,7 @@ let data = {
         {
             nombreU:"Juan Carlos Messi",
             texto:"Muy bueno lo recomiendo totalmente para los que quieran un telefono simple pero que ande muy rapido.",
-            imgPerfil:"/images/users/default-image.png",
+            imgPerfil:"/images/users/juancarlosmessi.jpg",
         },
     ],
 };
