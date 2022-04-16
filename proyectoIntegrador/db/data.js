@@ -6,6 +6,7 @@ let data = {
         contrasena: "0123456789",
         fechaNac: "29/03/2001",
         fotoPerfil: "/images/users/default-image.png",
+        nProductos: 4,
     },
     productos: [
         {
