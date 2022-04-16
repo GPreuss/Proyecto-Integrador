@@ -11,7 +11,7 @@ const controller = {
         res.render('register');
     },
     search: function(req, res, next) { 
-        res.render('search-results');
+        res.render('search-results', {data: data.productos});
     },
 }
 module.exports = controller;
