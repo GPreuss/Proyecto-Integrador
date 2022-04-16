@@ -2,6 +2,7 @@
 <html lang="es">
 <!-- Include Head -->
 <%- include('./partials/head') %>
+
 <body>
 	<!-- Header -->
 	<%- include('./partials/headerLogueado') %>
@@ -15,7 +16,7 @@
 			</div>
 			<div class="data-container col-6">
 				<div class="d-flex align-items-center ">
-					<h1 class="main-title"><%= data.nombre %> 
+					<h1 class="main-title"><%= data.nombre %>
 						<a href="/profile/edit">
 							<i class="fas fa-cog"></i>
 						</a>
@@ -46,17 +47,17 @@
 				<section class="product-box">
 					<a href="/product">
 						<figure class="product-box_image">
-							<img src="<%= productos[i].imagen %> " alt="cafetera moulinex">
+							<img src="<%= producto[i].imagen%>" alt="cafetera moulinex">
 						</figure>
 						<article class="product-box_data">
-							<h2><%= productos[i].nombre %> </h2>
-							<p><%= productos[i].descripcion %></p>
+							<h2><%= producto[i].nombre %> </h2>
+							<p><%= producto[i].descripcion %></p>
 							<p>Comentarios: 12</p>
 						</article>
 					</a>
 				</section>
 			</div>
-			<% } %> 
+			<% } %>
 		</div>
 	</div>
 	<!-- /Mis productos -->
@@ -65,5 +66,6 @@
 	<!-- footer -->
 	<%- include('./partials/footer') %>
 	<!-- /footer -->
-</body>	
+</body>
+
 </html>
