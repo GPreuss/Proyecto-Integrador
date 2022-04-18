@@ -43,6 +43,8 @@ a {
   display: inline-block;
   text-decoration: none;
   color: inherit;
+  font-weight: bold;
+
 }
 
 figure {
@@ -527,5 +529,9 @@ textarea.form-input {
   .footer-data {
     width: 95%;
     margin: auto;
+  }
+
+  .logopersona {
+    width: 15%;
   }
 }
