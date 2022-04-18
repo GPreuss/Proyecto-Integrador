@@ -14,9 +14,8 @@
 			<div class="col-12">
 				<h2 class="products-title">Editar mi perfil</h2>
 			</div>
-			<!-- Show the "ultimos" products -->
-			<h2 class="col-12">
-			<form action="/index/register" method="get">
+		
+			<form action="/index/register" method="get" class="formulario">
 				<input type="text" name="usuario" placeholder="<%= data.nombre %>">
 				<input type="password" name="contraseña" placeholder="<%= data.contrasena %>">
 				<input type="date" name="Fecha de Nacimiento" placeholder="<%= data.fechaNac %>">
@@ -24,7 +23,7 @@
 				<input type="file" name="<%= data.fotoPerfil %>" >
 				<button type="submit" title="Ingresar" name="Ingresar"><a href="/users/profile">Registrarse</a></button>
 			</form>
-			</h2>
+		
 
 
 	<!-- footer -->

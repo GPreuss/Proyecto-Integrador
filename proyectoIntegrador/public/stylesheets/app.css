@@ -140,6 +140,8 @@ hr {
   border: 0px;
   cursor: pointer;
   font-size: 1em;
+  color: white;
+  font-weight: bold;
 }
 
 .logout:hover{
@@ -172,9 +174,10 @@ hr {
 }
 
 .products-title {
-  font-size: 2.4em;
+  font-size:3em;
   font-weight: 400;
-  color: var(--gray);
+  color: black;
+  font-style: oblique;
 }
 
 .product-box {
@@ -427,6 +430,27 @@ hr {
 }
 
 /*====== Formularios ======*/
+.formulario {
+  width: 400px;
+  padding: 30px;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 4px;
+  font-family: 'calibri';
+
+}
+
+.formulario input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  border: 1px solid;
+  font-family: 'calibri';
+  font-size: 18px;
+
+}
+
 .form-label {
   display: inline-block;
   font-size: 1.6em;
