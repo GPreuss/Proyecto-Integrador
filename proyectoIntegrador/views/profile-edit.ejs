@@ -10,20 +10,19 @@
 
 	<!-- Novedades -->
 	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Editar mi perfil</h2>
-			</div>
-		
-			<form action="/index/register" method="get" class="formulario">
-				<input type="text" name="usuario" placeholder="<%= data.nombre %>">
-				<input type="password" name="contraseña" placeholder="<%= data.contrasena %>">
-				<input type="date" name="Fecha de Nacimiento" placeholder="<%= data.fechaNac %>">
-				<input type="number" name="DNI" placeholder="<%= data.DNI %>">
-				<input type="file" name="<%= data.fotoPerfil %>" >
-				<button type="submit" title="Ingresar" name="Ingresar"><a href="/users/profile">Registrarse</a></button>
-			</form>
-		
+		<div class="col-12">
+			<h2 class="products-title">Editar mi perfil</h2>
+		</div>
+
+		<form action="/index/register" method="get" class="formulario">
+			<input type="text" name="usuario" placeholder="<%= data.nombre %>">
+			<input type="password" name="contraseña" placeholder="<%= data.contrasena %>">
+			<input type="date" name="Fecha de Nacimiento" placeholder="<%= data.fechaNac %>">
+			<input type="number" name="DNI" placeholder="<%= data.DNI %>">
+			<input type="file" name="<%= data.fotoPerfil %>">
+			<button type="submit" title="Ingresar" name="Ingresar"><a href="/users/profile">Registrarse</a></button>
+		</form>
+	</div>
 
 
 	<!-- footer -->

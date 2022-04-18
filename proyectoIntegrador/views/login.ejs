@@ -10,24 +10,23 @@
 
 	<!-- Ingresar -->
 	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Ingresar</h2>
-			</div>
-			<!-- Show the "ultimos" products -->
-			
-			<form action="/index/login" method="get" class="formulario">
-				<input type="text" name="email" placeholder="email">
-				<input type="text" name="eusuario" placeholder="nombre de usuario">
-				<input type="password" name="contraseña" placeholder="contraseña">
-				<input type="checkbox" name="recordarme" placeholder="recordarme">
-				<button type="submit" title="Ingresar" name="Ingresar"><a href="/users/profile"> Ingresar </a></button>
-			</form>
-		
+		<div class="col-12">
+			<h2 class="products-title">Ingresar</h2>
+		</div>
+		<!-- Show the "ultimos" products -->
+
+		<form action="/index/login" method="get" class="formulario">
+			<input type="text" name="email" placeholder="email">
+			<input type="text" name="eusuario" placeholder="nombre de usuario">
+			<input type="password" name="contraseña" placeholder="contraseña">
+			<input type="checkbox" name="recordarme" placeholder="recordarme">
+			<button type="submit" title="Ingresar" name="Ingresar"><a href="/users/profile"> Ingresar </a></button>
+		</form>
+	</div>
 
 
 	<!-- footer -->
-	<%- include('./partials/footer') %>	
+	<%- include('./partials/footer') %>
 	<!-- /footer -->
 </body>
 

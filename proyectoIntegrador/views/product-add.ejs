@@ -10,24 +10,23 @@
 
 	<!-- Novedades -->
 	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Agregar productos</h2>
-			</div>
-		
-			<form action="/products/add" method="get" class="formulario">
-				<input type="text" name="Nombre del producto" placeholder="Nombre del producto">
-				<input type="date" name="fecha" placeholder="Fecha de carga">
-				<input type="text" name="descripcion" placeholder="Descripcion del producto">
-				<a style="color: aliceblue;">Fotos del producto</a>
-				<input type="file" name="Foto del perfil">
-				<button type="submit" title="Agregar" name="Ingresar"><a href="/product"> Agregar Producto</a></button>
-			</form>
-			
+		<div class="col-12">
+			<h2 class="products-title">Agregar productos</h2>
+		</div>
+
+		<form action="/products/add" method="get" class="formulario">
+			<input type="text" name="Nombre del producto" placeholder="Nombre del producto">
+			<input type="date" name="fecha" placeholder="Fecha de carga">
+			<input type="text" name="descripcion" placeholder="Descripcion del producto">
+			<a style="color: aliceblue;">Fotos del producto</a>
+			<input type="file" name="Foto del perfil">
+			<button type="submit" title="Agregar" name="Ingresar"><a href="/product"> Agregar Producto</a></button>
+		</form>
+	</div>
 
 
 	<!-- footer -->
-	<%- include('./partials/footer') %>	
+	<%- include('./partials/footer') %>
 	<!-- /footer -->
 </body>
 

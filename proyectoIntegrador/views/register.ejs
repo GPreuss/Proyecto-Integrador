@@ -5,25 +5,25 @@
 
 <body>
 	<!-- Header -->
-	<%- include('./partials/header') %> 
+	<%- include('./partials/header') %>
 	<!-- /Header -->
 
 	<!-- Novedades -->
 	<div class="container products-wrapper">
-		
-			<div class="col-12">
-				<h2 class="products-title">Registrate</h2>
-			</div>
-		
-		
-			<form action="/index/register" method="get" class="formulario">
-				<input type="text" name="usuario" placeholder="nombre de usuario">
-				<input type="password" name="contraseña" placeholder="contraseña">
-				<input type="date" name="Fecha de Nacimiento" placeholder="Fecha de Nacimiento">
-				<input type="number" name="DNI" placeholder="DNI">
-				<input type="file" name="Foto De Perfil" >
-				<button type="submit" title="Ingresar" name="Ingresar"><a href="/users/profile">Registrarse</a></button>
-			</form>
+
+		<div class="col-12">
+			<h2 class="products-title">Registrate</h2>
+		</div>
+
+
+		<form action="/index/register" method="get" class="formulario">
+			<input type="text" name="usuario" placeholder="nombre de usuario">
+			<input type="password" name="contraseña" placeholder="contraseña">
+			<input type="date" name="Fecha de Nacimiento" placeholder="Fecha de Nacimiento">
+			<input type="number" name="DNI" placeholder="DNI">
+			<input type="file" name="Foto De Perfil">
+			<button type="submit" title="Ingresar" name="Ingresar"><a href="/users/profile">Registrarse</a></button>
+		</form>
 	</div>
 
 
