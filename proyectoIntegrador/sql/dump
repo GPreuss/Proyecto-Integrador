@@ -25,10 +25,21 @@ foreign key (publicador) references users(id)
 
 CREATE TABLE comentarios(
 id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL,
-userName VARCHAR(255)NOT NULL,
+username INT NOT NULL,
 comentarioTexto VARCHAR(255)NOT NULL,
 createdAt DATETIME,
 updatedAt DATETIME,
 deletedAt DATETIME,
-foreign key (userName) references users(id)
+foreign key (username) references users(id)
 );
+
+CREATE TABLE followers(
+id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL,
+seguidor INT NOT NULL,
+seguido INT NOT NULL,
+foreign key (seguidor) references users(id),
+foreign key (seguido) references users(id)
+);
+
+alter table comentarios
+add foreign key (producto) references products(id)
