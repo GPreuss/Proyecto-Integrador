@@ -14,6 +14,9 @@ module.exports = function (sequelize, dataTypes){
         comentarioTexto: {
             type: dataTypes.STRING
         },
+        producto: {
+            type: dataTypes.INTEGER
+        },
         created_at : {
             type: dataTypes.DATE,
             allowNull:true,
