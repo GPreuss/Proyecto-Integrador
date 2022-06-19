@@ -8,7 +8,7 @@ module.exports = function (sequelize, dataTypes){
             primaryKey: true,
             type: dataTypes.INTEGER
         },
-        userName: {
+        user_id: {
             type: dataTypes.INTEGER
         },
         comentarioTexto: {
@@ -35,6 +35,24 @@ module.exports = function (sequelize, dataTypes){
     };
 
     const Comentario = sequelize.define(alias, cols, config);
+
+    Comentario.associate= function(models){
+        Comentario.belongsTo(models.User,
+            {
+                as:'user',
+                foreignKey: 'user_id'  
+            });
+
+        // Movie.belongsToMany(models.Actor, 
+        //     {
+        //         as: 'actors',
+        //         through: 'actor_movie',
+        //         foreignKey: 'movie_id',
+        //         otherKey:'actor_id',
+        //         timestamps: false,
+        //     })
+
+    }
 
     return Comentario;
 

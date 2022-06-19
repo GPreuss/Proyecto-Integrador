@@ -5,12 +5,15 @@ USE pruebaDB;
 CREATE TABLE users(
     id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL,
     email VARCHAR(255)UNIQUE NOT NULL,
-    password VARCHAR(255)NOT NULL,
+    password VARCHAR(255)NOT NULL,  
     userName VARCHAR(150)UNIQUE,
     createdAt DATETIME,
     updatedAt DATETIME,
     deletedAt DATETIME
 );
+//falta agrgar columna de avatar 
+
+
 
 CREATE TABLE products(
 id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL,
@@ -20,7 +23,7 @@ publicador INT NOT NULL,
 createdAt DATETIME,
 updatedAt DATETIME,
 deletedAt DATETIME,
-foreign key (publicador) references users(id)
+foreign key (publicador) references users(id)   
 );
 
 CREATE TABLE comentarios(

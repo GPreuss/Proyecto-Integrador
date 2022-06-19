@@ -28,7 +28,6 @@ module.exports = function (sequelize, dataTypes){
             type: dataTypes.DATE,
             allowNull: true,
         },
-
     }
 
     let config = {
