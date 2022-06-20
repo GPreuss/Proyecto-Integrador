@@ -7,4 +7,6 @@ router.get('/', controller.productDetalle);
 
 router.get('/add', controller.productAdd);
 
+router.post('/store', controller.store);
+
 module.exports = router;
