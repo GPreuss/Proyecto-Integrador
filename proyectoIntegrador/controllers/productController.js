@@ -9,13 +9,14 @@ const controller = {
     },
     productAdd: function(req, res, next) { 
         res.render('product-add', {data: data.usuario});
+        //
     },
     store: function(req, res){
         //Obtener los datos del formulario y armar el objeto literal que quiero guardar
         let producto = {
-            userName: req.body.usuario,
-            email: req.body.email,
-            password: req.body.password,
+            productName: req.body.productName,
+            descripcion: req.body.descripcion,
+            //publicador: req.body.password,
             //avatar: req.body.avatar,
         }
         //Guardar la info en la base de datos

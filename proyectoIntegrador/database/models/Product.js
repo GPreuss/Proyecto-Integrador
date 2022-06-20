@@ -14,12 +14,12 @@ module.exports = function (sequelize, dataTypes){
         descripcion: {
             type: dataTypes.STRING
         },
-        publicador: {
+        /*publicador: {
             type: dataTypes.INTEGER
         },
         imagen:{
             type: dataTypes.STRING
-        },
+        },*/
         created_at : {
             type: dataTypes.DATE,
             allowNull:true,
@@ -33,7 +33,7 @@ module.exports = function (sequelize, dataTypes){
     let config = {
         tableName : "products",
         timestamps:true, 
-        underscored: true, 
+        underscored: false, 
     };
 
     const Product = sequelize.define(alias, cols, config);
