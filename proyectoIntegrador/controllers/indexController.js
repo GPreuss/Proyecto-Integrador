@@ -6,7 +6,7 @@ const users = db.User
 
 const controller = {
     index: function(req, res, next) { 
-        res.render('index', {data: data.productos});      
+        res.render('index', {data: data.productos}  );
     },
     login: function(req, res, next) { 
         res.render('login');
@@ -21,12 +21,12 @@ const controller = {
             userName: req.body.usuario,
             email: req.body.email,
             password: req.body.password,
-            avatar: req.body.avatar,
+            //avatar: req.body.avatar,
         }
         //Guardar la info en la base de datos
         users.create(user)
             .then( function(respuesta){ //En el parámetro recibimos el registro que se acaba de crear en la base de datos.
-                
+                console.log(respuesta)
                 return res.redirect('/')
             })
             .catch( error => console.log(error))

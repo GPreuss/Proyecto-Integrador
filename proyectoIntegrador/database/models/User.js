@@ -17,9 +17,9 @@ module.exports = function (sequelize, dataTypes){
         password: {
             type: dataTypes.STRING
         },
-        avatar:{
+        /*avatar:{
             type: dataTypes.STRING
-        },
+        },*/
         created_at : {
             type: dataTypes.DATE,
             allowNull:true,
@@ -34,7 +34,7 @@ module.exports = function (sequelize, dataTypes){
     let config = {
         tableName : "users",
         timestamps: true, 
-        underscored: true, 
+        underscored: false, 
     };
 
     const User = sequelize.define(alias, cols, config);
