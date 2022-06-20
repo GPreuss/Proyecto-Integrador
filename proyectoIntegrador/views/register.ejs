@@ -15,14 +15,14 @@
 			<h2 class="products-title">Registrate</h2>
 		</div>
 
-
-		<form action="/index/register" method="get" class="formulario">
-			<input type="text" name="usuario" placeholder="nombre de usuario">
-			<input type="password" name="contraseña" placeholder="contraseña">
+		<form action="/store" method="post" class="formulario">
+			<input type="text" name="usuario" value="" placeholder="nombre de usuario">
+			<input type="text" name="email" value="" placeholder="email">
+			<input type="password" name="password" value="" placeholder="contraseña">
 			<input type="date" name="Fecha de Nacimiento" placeholder="Fecha de Nacimiento">
 			<input type="number" name="DNI" placeholder="DNI">
-			<input type="file" name="Foto De Perfil">
-			<button type="submit" title="Ingresar" name="Ingresar"><a href="/users/profile">Registrarse</a></button>
+			<input type="file" name="avatar" value="">
+			<button type="submit">Registrarse</button>
 		</form>
 	</div>
 

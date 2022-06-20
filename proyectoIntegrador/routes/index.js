@@ -9,7 +9,9 @@ router.get('/login',controller.login);
 
 router.get('/search-results', controller.search);
 
-router.get('/register', controller.register);
+router.get('/register', controller.create);
+
+router.post('/store', controller.store);
 
 
 module.exports = router;
