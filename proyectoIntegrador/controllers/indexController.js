@@ -21,7 +21,7 @@ const controller = {
             userName: req.body.usuario,
             email: req.body.email,
             password: req.body.password,
-            //avatar: req.body.avatar,
+            //avatar: req.file.filename,
         }
         //Guardar la info en la base de datos
         users.create(user)
@@ -92,30 +92,55 @@ const controller = {
             return res.render('login');
         }
     },
+    logout: function(req, res){
+        //destruir session
+        req.session.destroy();
+
+        //Eliminar cookie si existe.
+        if(req.cookies.userId !== undefined){
+            res.clearCookie('userId')
+        }
+
+        return res.redirect('/');
+    },
 
     signIn: function(req, res){
-        //verificar el que el mail exista en labase de datos.
-            //Buscar al usuario usando el email del form de login.
-            //Del usuario conseguido chequear que la contraseña del formulario coincida con la guardad el base.
-            //USamos compareSync 
-                    //Si las contraseñas coinciden avisemos con mensaje que todo está ok. Cuando sepamos loguear redireccionamos a la home con el proceso de login completo.
-                //Controlar que el usario no esté logueado
-
+        console.log("entre al sign in");
         users.findOne({
             where: [{email: req.body.email}]
         })
             .then(function(user){
-                if(user){
-                    req.session.user = user.dataValues;
-                    //Si el usuario tildó recordarme creo la cookie
-                    res.cookie('userId',user.dataValues.id,{maxAge: 1000*60*100} )
-                }
-                console.log(req.session.user);
-                return res.redirect('/')
+                //si trajo un usuario hay que chequear la contraseña con compareSync()
+                //Si las contraseñas no coincuiden mandamos mensaje de error.
+                console.log(req.body)
+                console.log('el usuario es: ' + user);
 
+                if(user){
+                    console.log('entro al if(user)');
+                    if(bcrypt.compareSync(req.body.password, user.password)){
+                        //Si el usuario tildó recordarme creo la cookie
+                        if (req.body.remember) {
+                            res.cookie('userId',user.dataValues.id,{maxAge: 1000*60*10} );
+                        } 
+                        console.log('coinciden');
+                        req.session.user = user.dataValues;
+                        res.locals.errores = ''
+                        console.log('los errores son' + res.locals.errores);
+                        return res.redirect('/profile/' + user.dataValues.id)
+                    } else {
+                        res.locals.errores = {mensaje:"la password no concide"};
+                        console.log('los errores son' + res.locals.errores);
+                        return res.render('login')
+                    }
+
+                } else{
+                    res.locals.errores = {mensaje:"El email es incorrecto"}; 
+                    console.log(res.locals.errores);
+                    return res.render('login')
+                }
             })
             .catch(error => console.log(error))
-
+        
     },
     search: function(req, res, next) { 
         res.render('search-results', {data: data.productos});
