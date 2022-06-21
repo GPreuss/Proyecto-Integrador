@@ -44,5 +44,14 @@ foreign key (seguidor) references users(id),
 foreign key (seguido) references users(id)
 );
 
+
 alter table comentarios
+add producto INT NOT NULL,
 add foreign key (producto) references products(id)
+
+alter table comentarios
+add publicador INT NOT NULL,
+add foreign key (publicador) references users(id)
+
+alter table users 
+add avatar varchar(255)
