@@ -16,7 +16,7 @@ const controller = {
         let producto = {
             productName: req.body.productName,
             descripcion: req.body.descripcion,
-            //publicador: req.body.password,
+            publicador: '1',
             //avatar: req.body.avatar,
         }
         //Guardar la info en la base de datos
