@@ -10,10 +10,10 @@ const controller = {
     productDetalle: function(req, res, next) { 
         res.render('product', {data: data.productos, comentarios: data.comentarios});      
     },
-    /*productAdd: function(req, res, next) { 
+    productAdd: function(req, res, next) { 
         res.render('product-add', {data: data.usuario});
         //
-    },*/
+    },
 
     show: function (req,res){
         productos.findOne({
@@ -51,13 +51,13 @@ const controller = {
         //return res.render('product', {info: data, array: array, id: req.params.id});
     },
 
-    productAdd: function (req, res) {
+    /*productAdd: function (req, res) {
         if (req.session.user == undefined) {
             return res.redirect('/')
         } else {
             return res.render('product-add' , {info: data});
         };
-    },
+    },*/
 
     store: function(req, res){
         //Obtener los datos del formulario y armar el objeto literal que quiero guardar
