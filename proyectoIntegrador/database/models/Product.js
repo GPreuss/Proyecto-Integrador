@@ -14,12 +14,12 @@ module.exports = function (sequelize, dataTypes){
         descripcion: {
             type: dataTypes.STRING
         },
-        /*publicador: {
+        publicador: {
             type: dataTypes.INTEGER
         },
-        imagen:{
-            type: dataTypes.STRING
-        },*/
+        //imagen:{
+            //type: dataTypes.STRING
+       // },
         created_at : {
             type: dataTypes.DATE,
             allowNull:true,
@@ -37,6 +37,19 @@ module.exports = function (sequelize, dataTypes){
     };
 
     const Product = sequelize.define(alias, cols, config);
+
+    Product.associate = function(models){
+        Product.belongsTo(models.User,
+            {
+                as: 'publicadorProducto',
+                foreignKey: 'publicador'
+            });
+        Product.hasMany(models.Comentario,
+            {
+                as: 'comentarios',
+                foreignKey: 'id'
+            });
+    }
 
     return Product;
 

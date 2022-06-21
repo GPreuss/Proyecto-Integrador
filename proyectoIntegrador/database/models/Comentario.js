@@ -17,6 +17,9 @@ module.exports = function (sequelize, dataTypes){
         producto: {
             type: dataTypes.INTEGER
         },
+        username: {
+            type: dataTypes.INTEGER
+        },
         created_at : {
             type: dataTypes.DATE,
             allowNull:true,
@@ -36,21 +39,19 @@ module.exports = function (sequelize, dataTypes){
 
     const Comentario = sequelize.define(alias, cols, config);
 
-    Comentario.associate= function(models){
-        Comentario.belongsTo(models.User,
+ 
+    Comentario.associate = function(models){
+        Comentario.belongsTo(models.Product,
             {
-                as:'user',
-                foreignKey: 'user_id'  
+                as: 'productoComentado',
+                foreignKey: 'producto'
             });
 
-        // Movie.belongsToMany(models.Actor, 
-        //     {
-        //         as: 'actors',
-        //         through: 'actor_movie',
-        //         foreignKey: 'movie_id',
-        //         otherKey:'actor_id',
-        //         timestamps: false,
-        //     })
+        Comentario.belongsTo(models.User,
+            {
+                as: 'comentador',
+                foreignKey: 'username'
+            });
 
     }
 
