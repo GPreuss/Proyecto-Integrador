@@ -5,13 +5,12 @@ const controller = require('../controllers/indexController');
 /* GET home page. */
 router.get('/',controller.index);
 
-router.get('/login',controller.login);
-
 router.get('/search-results', controller.search);
 
 router.get('/register', controller.create);
 
 router.post('/store', controller.store);
 
+router.get('/login',controller.login);
 
 module.exports = router;
