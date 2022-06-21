@@ -2,20 +2,22 @@ const data = require("../db/data")
 const db = require("../database/models")
 const productos = db.Product;
 const users = db.User
-
+const op = db.Sequelize.Op;
 
 const controller = {
-    index: function(req, res, next) { 
-        res.render('index', {data: data.productos}  );
+    index: function (req, res, next) {
+        res.render('index', {
+            data: data.productos
+        });
     },
-    login: function(req, res, next) { 
+    login: function (req, res, next) {
         res.render('login');
     },
-    create: function(req, res){
+    create: function (req, res) {
         console.log(users)
         return res.render('register')
     },
-    store: function(req, res){
+    store: function (req, res) {
         //Obtener los datos del formulario y armar el objeto literal que quiero guardar
         let user = {
             userName: req.body.usuario,
@@ -25,11 +27,11 @@ const controller = {
         }
         //Guardar la info en la base de datos
         users.create(user)
-            .then( function(respuesta){ //En el parámetro recibimos el registro que se acaba de crear en la base de datos.
+            .then(function (respuesta) { //En el parámetro recibimos el registro que se acaba de crear en la base de datos.
                 console.log(respuesta)
                 return res.redirect('/')
             })
-            .catch( error => console.log(error))
+            .catch(error => console.log(error))
     },
     /*
     storeProfile: function (req, res){
@@ -83,67 +85,104 @@ const controller = {
 
     },
     */
-    login: function(req, res){
+    login: function (req, res) {
         //mostrar el form de registro
         //Chequear que un usario esté logueado
-          if(req.session.user != undefined){
+        if (req.session.user != undefined) {
             return res.redirect('/')
-        } else {  
+        } else {
             return res.render('login');
         }
     },
-    logout: function(req, res){
+    logout: function (req, res) {
         //destruir session
         req.session.destroy();
 
         //Eliminar cookie si existe.
-        if(req.cookies.userId !== undefined){
+        if (req.cookies.userId !== undefined) {
             res.clearCookie('userId')
         }
 
         return res.redirect('/');
     },
 
-    signIn: function(req, res){
+    signIn: function (req, res) {
         console.log("entre al sign in");
         users.findOne({
-            where: [{email: req.body.email}]
-        })
-            .then(function(user){
+                where: [{
+                    email: req.body.email
+                }]
+            })
+            .then(function (user) {
                 //si trajo un usuario hay que chequear la contraseña con compareSync()
                 //Si las contraseñas no coincuiden mandamos mensaje de error.
                 console.log(req.body)
                 console.log('el usuario es: ' + user);
 
-                if(user){
+                if (user) {
                     console.log('entro al if(user)');
-                    if(bcrypt.compareSync(req.body.password, user.password)){
+                    if (bcrypt.compareSync(req.body.password, user.password)) {
                         //Si el usuario tildó recordarme creo la cookie
                         if (req.body.remember) {
-                            res.cookie('userId',user.dataValues.id,{maxAge: 1000*60*10} );
-                        } 
+                            res.cookie('userId', user.dataValues.id, {
+                                maxAge: 1000 * 60 * 10
+                            });
+                        }
                         console.log('coinciden');
                         req.session.user = user.dataValues;
                         res.locals.errores = ''
                         console.log('los errores son' + res.locals.errores);
                         return res.redirect('/profile/' + user.dataValues.id)
                     } else {
-                        res.locals.errores = {mensaje:"la password no concide"};
+                        res.locals.errores = {
+                            mensaje: "la password no concide"
+                        };
                         console.log('los errores son' + res.locals.errores);
                         return res.render('login')
                     }
 
-                } else{
-                    res.locals.errores = {mensaje:"El email es incorrecto"}; 
+                } else {
+                    res.locals.errores = {
+                        mensaje: "El email es incorrecto"
+                    };
                     console.log(res.locals.errores);
                     return res.render('login')
                 }
             })
             .catch(error => console.log(error))
-        
+
     },
-    search: function(req, res, next) { 
-        res.render('search-results', {data: data.productos});
+    search: function (req, res, next) {
+        res.render('search-results', {
+            data: data.productos
+        });
+    },
+    searchResults: function (req, res) {
+        let search = req.query.search
+        productos.findAll({
+            include: [{
+                association: 'usuario'
+            }, {
+                association: 'comentario'
+            }],
+            where: {
+                [op.or]: [{
+                        nombre: {
+                            [op.like]: `%${search}%`
+                        }
+                    },
+                    {
+                        descripcion: {
+                            [op.like]: `%${search}%`
+                        }
+                    }
+                ]
+            }
+        }).then(function (unosProductos) {
+            return res.render('search-results', {
+                productos: unosProductos
+            })
+        })
     },
 }
 module.exports = controller;

@@ -15,18 +15,19 @@
 			<div class="col-12">
 				<h2 class="products-title">Resultados de búsqueda</h2>
 			</div>
-			<!-- Show the "ultimos" products -->
-			<% for(let i = 0; i < 4; i++ ) { %>
+			<!-- mostrar resultados -->
+			<% if (prudctos.length > 0 )%>
+			<% for(let i = 0; i < prudctos.length; i++ ) { %>
 
-			<div class="col-12 col-sm-6 col-lg-3">
+			<div class="col-12 col-sm-6 col-lg-3">	
 				<section class="product-box">
-					<a href="/product">
+					<a href="/product/<%= productos[i].nombre %>">
 						<figure class="product-box_image">
-							<img src="<%= data[i].imagen%>" alt="cafetera moulinex">
+							<img src="/images/products/<%=productos[i].imagen %>" alt="foto de <%= productos[i].nombre %>">
 						</figure>
 						<article class="product-box_data">
-							<h2><%= data[i].nombre%></h2>
-							<p><%= data[i].descripcion%></p>
+							<h2><%= productos[i].nombre%></h2>
+							<p><%= productos[i].descripcion%></p>
 							<p>Comentarios: 12</p>
 						</article>
 					</a>
