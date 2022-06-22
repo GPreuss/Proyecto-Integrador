@@ -14,7 +14,11 @@
 		<div class="col-12">
 			<h2 class="products-title">Registrate</h2>
 		</div>
-
+		<div class="col-12">
+			<%  if(locals.errores) {%> 
+				<p><%= errores.message%> </p>
+			<% } %>
+		</div>
 		<form action="/store" method="post" class="formulario">
 			<input type="text" name="usuario" value="" placeholder="nombre de usuario">
 			<input type="text" name="email" value="" placeholder="email">
