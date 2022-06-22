@@ -20,48 +20,49 @@ const controller = {
     },
     store: function (req, res) {
 
-    let errores = {}
-    if (req.body.email == "") {
-        errores.message = "El email es obligatorio";
+        let errores = {}
+        if (req.body.email == "") {
+            errores.message = "El email es obligatorio";
             res.locals.errores = errores;
             return res.render('register');
-    } else if(req.body.password == ""){
-        errores.message = "la contraseña es obligatoria";
-        res.locals.errores = errores;
-        return res.render('register'); 
-    }else if(req.body.usuario == undefined){
-        errores.message = "Es obligatorio completar el usuario";
-        res.locals.errores = errores;
-        return res.render('register'); 
-    }  else { 
-        users.findOne({
-        where: [{ username: req.body.usuario}]
-    }) 
-    .then( function(user)     {
-        if(user !== null){
-            errores.message = "El usuario ya existe. Por favor, elija otro.";
+        } else if (req.body.password == "") {
+            errores.message = "la contraseña es obligatoria";
             res.locals.errores = errores;
             return res.render('register');
-        } else {   
-        //Obtener los datos del formulario y armar el objeto literal que quiero guardar
-        let user = {
-            userName: req.body.usuario,
-            email: req.body.email,
-            password: bcrypt.hashSync(req.body.password, 10),
-            //avatar: req.file.filename,
-        }
-        //Guardar la info en la base de datos
-        users.create(user)
-            .then(function (respuesta) { //En el parámetro recibimos el registro que se acaba de crear en la base de datos.
-                console.log(respuesta)
-                return res.redirect('/')
+        } else if (req.body.usuario == undefined) {
+            errores.message = "Es obligatorio completar el usuario";
+            res.locals.errores = errores;
+            return res.render('register');
+        } else {
+            users.findOne({
+                where: [{ username: req.body.usuario }]
             })
-            .catch( error => console.log(error))
+                .then(function (user) {
+                    if (user !== null) {
+                        errores.message = "El usuario ya existe. Por favor, elija otro.";
+                        res.locals.errores = errores;
+                        return res.render('register');
+                    } else {
+                        //Obtener los datos del formulario y armar el objeto literal que quiero guardar
+                        let user = {
+                            userName: req.body.usuario,
+                            email: req.body.email,
+                            password: bcrypt.hashSync(req.body.password, 10),
+                            //avatar: req.file.filename,
                         }
-            })                
-            .catch(errors => console.log(errors))
-            }},
-    
+                        //Guardar la info en la base de datos
+                        users.create(user)
+                            .then(function (respuesta) { //En el parámetro recibimos el registro que se acaba de crear en la base de datos.
+                                console.log(respuesta)
+                                return res.redirect('/')
+                            })
+                            .catch(error => console.log(error))
+                    }
+                })
+                .catch(errors => console.log(errors))
+        }
+    },
+
     login: function (req, res) {
         //mostrar el form de registro
         //Chequear que un usario esté logueado
@@ -84,24 +85,46 @@ const controller = {
     },
 
     signIn: function (req, res) {
-       
+
         let errores = {}
         // console.log("entre al sign in");
         users.findOne({
-            where:[{email : req.body.email}]
+            where: [{ email: req.body.email }]
         })
-        .then(function(users){
-            //falta la validacion si existe o no el mail
-        if(users){
-            req.session.user = users.dataValues ;
-            // si el usuario tildo recordame creo la cookie
-            res.cookie('userID',users.dataValues.id,{maxAge:1000*60*100})
-        }
-        console.log(req.session.user)
-        // console.log(req.session.user); //para ver si existe la session 
-            return res.redirect('/')
-        })
-        .catch(error => console.log(error))
+
+            .then(function (users) {
+                if(users){
+                let compare = bcrypt.compareSync(req.body.password, users.password);
+                //falta la validacion si existe o no el mail
+                if (compare) {
+                    req.session.user = users.dataValues;
+                    // si el usuario tildo recordame creo la cookie
+                    if (req.body.recordarme) {
+                        res.cookie('userID', users.dataValues.id, { maxAge: 1000 * 60 * 100 })
+
+                        console.log(errores)
+                    }
+                    return res.redirect('/');
+
+                } else {
+                    errores.message = "Contraseña incorrecta" 
+                    res.locals.errores = errores 
+                    return res.render('login');
+
+                }
+
+                } else {
+                    errores.message = "Ese usuario no existe"
+                    res.locals.errores = errores
+                    return res.render('login');
+
+                }
+
+                //return res.redirect('/')
+            })
+            .catch(error => console.log(error))
+
+
     },
     search: function (req, res, next) {
         res.render('search-results', {
