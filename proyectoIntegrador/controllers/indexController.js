@@ -6,10 +6,17 @@ const op = db.Sequelize.Op;
 const bcrypt = require('bcryptjs')
 
 const controller = {
-    index: function (req, res, next) {
-        res.render('index', {
-            data: data.productos
-        });
+    index: function (req, res) {
+        productos.findAll({
+            include: [{association: 'publicadorProducto'},{association: 'comentarios'}],order: [['createdAt','ASC']]
+        })
+        .then(productos => {
+            return res.render('index', {
+                productos: productos,
+            })    
+        })
+
+        .catch(error => console.log(error))
     },
     login: function (req, res, next) {
         res.render('login');
