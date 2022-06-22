@@ -107,7 +107,7 @@ const controller = {
                     req.session.user = users.dataValues;
                     // si el usuario tildo recordame creo la cookie
                     if (req.body.recordarme) {
-                        res.cookie('userID', users.dataValues.id, { maxAge: 1000 * 60 * 100 })
+                        res.cookie('userId', users.dataValues.id, { maxAge: 1000 * 60 * 100 })
 
                         console.log(errores)
                     }
