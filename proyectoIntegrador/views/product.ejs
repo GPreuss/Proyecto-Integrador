@@ -15,26 +15,26 @@
 	<!-- product detail -->
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
-			<h2 class="products-title" <%= data[4].nombre %></h2> <p class="product-detail-description">
+			<h2 class="products-title" <%= productos.productName %></h2> <p class="product-detail-description">
 				<a href="/product/add">Editar</a>
 				</p>
 		</div>
 		<div class="product-detail">
 			<div class="row">
 				<article class="col-12 col-lg-8 product-detail-info">
-					<img src="<%= data[4].imagen %>" alt="" class="product-detail-img">
+					<img src="<%= productos.imagen %>" alt="" class="product-detail-img">
 					<p class="product-detail-description">
-						<%= data[4].descripcion %></p>
+						<%= productos.descripcion %></p>
 				</article>
 				<div class="col-12 col-lg-4">
 					<section class="comments">
-						<% for(let i = 0; i < 4; i++ ) { %>
+						<% for(let i = 0; i < comments.length; i++ ) { %>
 						<article>
-							<img src=<%= comentarios[i].imgPerfil %> alt="">
+							<img src=<%= comments.username.avatar %> alt="">
 							<div class="data">
 								<p class="user">
-									<strong> <a href="/users/profile"><%= comentarios[i].nombreU %>: </a> </strong>
-									<%= comentarios[i].texto %></p>
+									<strong> <a href="/users/profile"><%= comments.username.userName %>: </a> </strong>
+									<%= comments.comentarioTexto %></p>
 							</div>
 						</article>
 						<% } %>
