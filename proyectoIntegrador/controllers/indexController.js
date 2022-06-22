@@ -55,7 +55,7 @@ const controller = {
                             userName: req.body.usuario,
                             email: req.body.email,
                             password: bcrypt.hashSync(req.body.password, 10),
-                            //avatar: req.file.filename,
+                            avatar: req.file.filename,
                         }
                         //Guardar la info en la base de datos
                         users.create(user)
