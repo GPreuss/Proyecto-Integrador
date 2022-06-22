@@ -56,7 +56,7 @@ const controller = {
     },
     signIn: function(req,res){
         users.findOne({
-            where:[{userName : req.body.usuario}]
+            where:[{email : req.body.email}]
         })
         console.log()
         .then(function(users){
