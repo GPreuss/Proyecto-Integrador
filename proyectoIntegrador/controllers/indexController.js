@@ -3,6 +3,7 @@ const db = require("../database/models")
 const productos = db.Product;
 const users = db.User
 const op = db.Sequelize.Op;
+const bcrypt = require('bcryptjs')
 
 const controller = {
     index: function (req, res, next) {
@@ -18,11 +19,35 @@ const controller = {
         return res.render('register')
     },
     store: function (req, res) {
+
+    let errores = {}
+    if (req.body.email == "") {
+        errores.message = "El email es obligatorio";
+            res.locals.errores = errores;
+            return res.render('register');
+    } else if(req.body.password == ""){
+        errores.message = "la contraseña es obligatoria";
+        res.locals.errores = errores;
+        return res.render('register'); 
+    }else if(req.body.usuario == undefined){
+        errores.message = "Es obligatorio completar el usuario";
+        res.locals.errores = errores;
+        return res.render('register'); 
+    }  else { 
+        users.findOne({
+        where: [{ username: req.body.usuario}]
+    }) 
+    .then( function(user)     {
+        if(user !== null){
+            errores.message = "El usuario ya existe. Por favor, elija otro.";
+            res.locals.errores = errores;
+            return res.render('register');
+        } else {   
         //Obtener los datos del formulario y armar el objeto literal que quiero guardar
         let user = {
             userName: req.body.usuario,
             email: req.body.email,
-            password: req.body.password,
+            password: bcrypt.hashSync(req.body.password, 10),
             //avatar: req.file.filename,
         }
         //Guardar la info en la base de datos
@@ -31,8 +56,11 @@ const controller = {
                 console.log(respuesta)
                 return res.redirect('/')
             })
-            .catch(error => console.log(error))
-    },
+            .catch( error => console.log(error))
+                        }
+            })                
+            .catch(errors => console.log(errors))
+            }},
     
     login: function (req, res) {
         //mostrar el form de registro
@@ -56,7 +84,9 @@ const controller = {
     },
 
     signIn: function (req, res) {
-        console.log("entre al sign in");
+       
+        let errores = {}
+        // console.log("entre al sign in");
         users.findOne({
             where:[{email : req.body.email}]
         })
