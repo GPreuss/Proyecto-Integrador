@@ -58,7 +58,6 @@ const controller = {
         users.findOne({
             where:[{email : req.body.email}]
         })
-        console.log()
         .then(function(users){
             //falta la validacion si existe o no el mail
         if(users){
