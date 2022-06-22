@@ -18,12 +18,11 @@
 			<h2 class="products-title">Agregar productos</h2>
 		</div>
 
-		<form action="/product/store" method="post" class="formulario">
+		<form action="/product/store" method="post" enctype="multipart/form-data" class="formulario">
 			<input type="text" name="productName" value="" placeholder="Nombre del producto">
 			<input type="date" name="fecha" value="" placeholder="Fecha de carga">
 			<input type="text" name="descripcion" value="" placeholder="Descripcion del producto">
-			<a style="color: aliceblue;" value="" name="imagen">Fotos del producto</a>
-			<input type="file" value="" name="Foto del perfil">
+			<input type="file" value="" name="imagen">
 			<button type="submit" title="Agregar" name="Ingresar">Agregar Producto</button>
 		</form>
 	</div>
