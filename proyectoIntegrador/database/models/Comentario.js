@@ -8,23 +8,20 @@ module.exports = function (sequelize, dataTypes){
             primaryKey: true,
             type: dataTypes.INTEGER
         },
-        /*user_id: {
+        username: {
             type: dataTypes.INTEGER
-        },*/
+        },
         comentarioTexto: {
             type: dataTypes.STRING
         },
         producto: {
             type: dataTypes.INTEGER
         },
-        username: {
-            type: dataTypes.INTEGER
-        },
-        created_at : {
+        createdAt : {
             type: dataTypes.DATE,
             allowNull:true,
         },
-        updated_at: {
+        updatedAt: {
             type: dataTypes.DATE,
             allowNull: true,
         },
@@ -34,7 +31,7 @@ module.exports = function (sequelize, dataTypes){
     let config = {
         tableName : "comentarios",
         timestamps:true, 
-        underscored: true, 
+        underscored: false, 
     };
 
     const Comentario = sequelize.define(alias, cols, config);
