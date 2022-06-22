@@ -157,13 +157,13 @@ const controller = {
             data: data.productos
         });
     },
-    searchResults: function (req, res) {
+    /*searchResults: function (req, res) {
         let search = req.query.search
         productos.findAll({
             include: [{
-                association: 'usuario'
+                association: 'publicadorProducto'
             }, {
-                association: 'comentario'
+                association: 'comentarios'
             }],
             where: {
                 [op.or]: [{
@@ -183,6 +183,6 @@ const controller = {
                 productos: unosProductos
             })
         })
-    },
+    },*/
 }
 module.exports = controller;

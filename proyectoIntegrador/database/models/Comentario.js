@@ -8,9 +8,9 @@ module.exports = function (sequelize, dataTypes){
             primaryKey: true,
             type: dataTypes.INTEGER
         },
-        user_id: {
+        /*user_id: {
             type: dataTypes.INTEGER
-        },
+        },*/
         comentarioTexto: {
             type: dataTypes.STRING
         },
