@@ -65,7 +65,7 @@ const controller = {
         if(users){
             req.session.user = users.dataValues ;
             // si el usuario tildo recordame creo la cookie
-            res.cookie('userID',users.dataValues.id,{maxAge:1000*60*10})
+            res.cookie('userID',users.dataValues.id,{maxAge:1000*60*100})
         }
         console.log(req.session.user)
         // console.log(req.session.user); //para ver si existe la session 

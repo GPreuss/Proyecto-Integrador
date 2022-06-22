@@ -36,11 +36,11 @@
 
 			<ul class="right-navbar">
 				<li><a href="/users/profile">
-						<%= data.nombre %> <i class="fas fa-user"></i>
+						<%= user.userName %> <i class="fas fa-user"></i>
 					</a>
 				</li>
 				<li>
-					<form action="" method="post">
+					<form action="/logout" method="post">
 						<button class="logout" type="submit">
 							Cerrar sesión <i class="fas fa-sign-in-alt"></i>
 						</button>
