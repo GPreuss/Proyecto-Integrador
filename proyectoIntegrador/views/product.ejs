@@ -28,19 +28,19 @@
 				</article>
 				<div class="col-12 col-lg-4">
 					<section class="comments">
-						<% for(let i = 0; i < comments.length; i++ ) { %>
+						<% for(let i = 0; i < comentarios.length; i++ ) { %>
 						<article>
-							<img src=<%= comments.username.avatar %> alt="">
+							<img src="/images/users<%= comentarios[i].username.avatar%>" alt="">
 							<div class="data">
 								<p class="user">
-									<strong> <a href="/users/profile"><%= comments.username.userName %>: </a> </strong>
-									<%= comments.comentarioTexto %></p>
+									<strong> <a href="/users/profile/<%= comentarios[i].usuario.id %>"><%= comentarios[i].username.userName %>: </a> </strong>
+									<%= comentarios[i].comentarioTexto %></p>
 							</div>
 						</article>
 						<% } %>
 					</section>
-					<form class="form" action="" method="POST">
-						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
+					<form class="form" action="/product/comentario/<%= productos.id %>" method="POST">
+						<input class="form-input" type="text" name= texto value="" placeholder="Agregar comentario">
 						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
 					</form>
 					<hr>

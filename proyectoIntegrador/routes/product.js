@@ -23,4 +23,6 @@ router.post('/store', upload.single('imagen'), controller.store);
 
 router.get('/detalle/:id', controller.productDetalle);
 
+router.post('/comentario/:id', controller.comentario);
+
 module.exports = router;
