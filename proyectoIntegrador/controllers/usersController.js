@@ -3,63 +3,49 @@ const db = require("../database/models")
 const productos = db.Product;
 const users = db.User
 const comentarios = db.Comentario
+const Follower = db.Follower
 const op = db.Sequelize.Op;
 
 const controller = {
-    perfil: function (req, res, next) {
-        res.render('profile', {
-            data: data.usuario,
-            producto: data.productos
-        });
-    },
-    /*
     profile: function (req, res) {
-        // if(req.session.user == undefined){
-        //    return res.redirect('/')
-        // } else {
-
         productos.findAll({
                 where: [{
-                    usuarioId: req.params.id
+                    publicador: req.params.id
                 }],
             })
             .then(function (productos) {
-                usuarios.findOne({
-                        where: [{
-                            id: req.params.id
-                        }],
-                    })
+                users.findByPk(req.params.id)
                     .then(function (usuarios) {
-                        seguidores.findAll({
+                        Follower.findAll({
                                 where: [{
-                                    seguidoId: req.params.id
+                                    seguido: req.params.id
                                 }]
                             })
-                            .then(function (seguidores) {
+                            .then(function (Follower) {
                                 comentarios.findAll({
                                         include: [{
-                                            association: "usuario"
+                                            association: "comentador"
                                         }],
                                         where: [{
-                                            usuarioId: req.params.id
+                                            username: req.params.id
                                         }]
                                     })
                                     .then(function (comentarios) {
                                         return res.render('profile', {
                                             usuarios: usuarios,
                                             productos: productos,
-                                            seguidores: seguidores,
+                                            Follower: Follower,
                                             comentarios: comentarios
                                         });
                                     })
+                                    .catch(error => console.log(error))
                             })
-
+                            .catch(error => console.log(error))
                     })
                     .catch(error => console.log(error))
             })
             .catch(error => console.log(error))
     },
-    */
     editarPerfil: function (req, res, next) {
         res.render('profile-edit', {
             data: data.usuario
@@ -92,8 +78,8 @@ const controller = {
                 })
         }
     },
-    seguir: function (req, res) {
-        seguidores.findOne({
+    follow: function (req, res) {
+        Follower.findOne({
                 where: [{
                     seguidor: req.session.user.id,
                     seguido: req.params.id
@@ -101,11 +87,17 @@ const controller = {
             })
             .then(function (user) {
                 if (user) {
-                    return res.redirect(`/users/profile/${req.params.id}`)
+                    Follower.destroy({
+                        where: { seguidorId: req.session.user.id, seguidoId: req.params.id}
+                    })
+                    .then(function (answer) {
+                        return res.redirect(`/users/profile/${req.params.id}`)
+                    })
+                    .catch(error => console.log(error))
                 } else {
-                    seguidores.create({
-                            seguidorId: req.session.user.id,
-                            seguidoId: req.params.id
+                    Follower.create({
+                            seguidor: req.session.user.id,
+                            seguido: req.params.id
                         })
                         .then(function (respuesta) {
                             return res.redirect(`/users/profile/${req.params.id}`)
@@ -114,6 +106,7 @@ const controller = {
                 }
             })
             .catch(error => console.log(error))
+
     },
 }
 module.exports = controller;
