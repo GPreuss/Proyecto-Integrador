@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+<%- include('./partials/head') %>
+
+<body>
+	<!-- Header -->
+	<% if (locals.user) { %> 
+		<%- include('partials/headerLogueado') %>
+	<% } else { %>
+		<%- include('partials/header') %>
+	<% } %> 
+	<!-- /Header -->
+
+	<!-- Novedades -->
+	<div class="container products-wrapper">
+		<div class="col-12">
+			<h2 class="products-title">Agregar productos</h2>
+		</div>
+
+		<form action="/product/store" method="post" enctype="multipart/form-data" class="formulario">
+			<input type="text" name="productName" value="" placeholder="Nombre del producto">
+			<input type="date" name="fecha" value="" placeholder="Fecha de carga">
+			<input type="text" name="descripcion" value="" placeholder="Descripcion del producto">
+			<input type="file" value="" name="imagen">
+			<button type="submit" title="Agregar" name="Ingresar">Agregar Producto</button>
+		</form>
+	</div>
+
+	<!-- footer -->
+	<%- include('./partials/footer') %>
+	<!-- /footer -->
+</body>
+
+</html>
