@@ -61,6 +61,27 @@ const controller = {
             })
             .catch( error => console.log(error))
     },
+    edit: function(req, res){
+        if (req.session.user == undefined) {
+            return res.redirect('/')
+        } else {
+            productos.findByPk(req.params.id)
+            .then(function(producto){
+                if(producto.usuarioId == req.session.user.id){
+                    productos.findOne({
+                        where: [{id: req.params.id}]
+                    })
+                    .then (function(elProducto){
+                        return res.render('edit' , {productos: elProducto});
+                    })
+                    .catch(error => console.log(error))
+                } else {
+                    return res.redirect('/')
+                }
+            })
+            .catch(error => console.log(error))
+        }
+    }, 
 
 }
 module.exports = controller;
