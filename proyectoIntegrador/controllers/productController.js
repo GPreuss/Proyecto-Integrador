@@ -2,7 +2,7 @@ const data = require("../db/data")
 const db = require("../database/models")
 const productos = db.Product;
 const users = db.User
-const comments = db.Comentario
+const comentarios = db.Comentario
 const op = db.Sequelize.Op;//contiene los operadores para usar en metodos de sequelize
 const bcrypt = require('bcryptjs')
 
@@ -15,11 +15,11 @@ const controller = {
                     association: "publicadorProducto"
                 }],
                 where: [{
-                    productName: id
+                    id: id
                 }]
             })
             .then(function (elProducto) {
-                comments.findAll( {
+                comentarios.findAll( {
                         include: [{
                             association: "comentador"
                         }, {
@@ -34,7 +34,7 @@ const controller = {
                     .then(function (comentarios) {
                         return res.render('product', {
                             productos: elProducto,
-                            comments: comentarios
+                            comentarios: comentarios
                         })
                     })
                     .catch(error => console.log(error))
@@ -61,27 +61,25 @@ const controller = {
             })
             .catch( error => console.log(error))
     },
-    edit: function(req, res){
+    comentario: function (req, res) {
         if (req.session.user == undefined) {
-            return res.redirect('/')
+            return res.redirect('/login')
         } else {
-            productos.findByPk(req.params.id)
-            .then(function(producto){
-                if(producto.usuarioId == req.session.user.id){
-                    productos.findOne({
-                        where: [{id: req.params.id}]
-                    })
-                    .then (function(elProducto){
-                        return res.render('edit' , {productos: elProducto});
-                    })
-                    .catch(error => console.log(error))
-                } else {
-                    return res.redirect('/')
-                }
+            let comentario = {
+                comentarioTexto: req.body.texto,
+                username: req.session.user.id,
+                producto: req.params.id
+            }
+            comentarios.create(comentario)
+            .then (function(respuesta){
+                productos.findByPk(req.params.id)
+                .then (function(producto){
+                    return res.redirect (`/product/detalle/${producto.id}`)
+                })
+                .catch(error => console.log(error))
             })
             .catch(error => console.log(error))
-        }
-    }, 
-
+        };
+    },
 }
 module.exports = controller;
