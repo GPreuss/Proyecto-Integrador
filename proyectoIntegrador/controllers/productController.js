@@ -81,5 +81,32 @@ const controller = {
             .catch(error => console.log(error))
         };
     },
+
+    productosEdit: function (req, res) {
+        productos.findByPk(req.params.id) //el req.params me trae "id:numero" por eso nos da error.
+        .then(producto => {
+            return res.render('edit', {producto: producto})
+           
+        })
+
+},
+
+edited: function(req,res){
+    let product = {
+        nombre: req.body.productName,
+        descripcion:req.body.descripcion,
+        imagen:req.file.filename,
+        publicador: req.session.user.id, // otro error parecido con el id, no encontramos la solucion. 
+    }
+    productos.update(product, {
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(function (respuesta) {
+        return res.redirect(`/products/${req.params.id}`)
+    })
+    .catch(error => console.log(error))
+},
 }
 module.exports = controller;

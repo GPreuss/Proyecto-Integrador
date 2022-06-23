@@ -18,13 +18,25 @@
 			<h2 class="products-title">Agregar productos</h2>
 		</div>
 
-		<form action="/product/store" method="post" enctype="multipart/form-data" class="formulario">
-			<input type="text" name="productName" value="" placeholder="Nombre del producto">
-			<input type="date" name="fecha" value="" placeholder="Fecha de carga">
-			<input type="text" name="descripcion" value="" placeholder="Descripcion del producto">
-			<input type="file" value="" name="imagen">
-			<button type="submit" title="Agregar" name="Ingresar">Agregar Producto</button>
-		</form>
+		<form action="/product/edited/<%= producto.id %>" method="post" enctype="multipart/form-data">
+            <div>
+                 <label for="nombre">Nombre:</label>
+                 <input id="nombre" type="text" name="nombre" value="<%=producto.productName%> ">
+             </div>				
+                
+                  <div>
+                <label for="Descripción">Descripción:</label>
+                <input id="Descripción" type="text" name="descripcion" value="<%= producto.descripcion %> ">
+                </div>
+
+               <div>
+                <label for="imagen del producto">imagen del producto:</label>
+                <input id="imagen del producto" type="file" required name="imagen" accept="image/png,image/jpeg" value="">
+               </div>			 
+           <div>
+                 <button type="submit">Enviar</button>
+            </div>
+        </form>
 	</div>
 
 	<!-- footer -->
