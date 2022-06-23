@@ -133,37 +133,22 @@ const controller = {
 
 
     },
-    search: function (req, res, next) {
-        res.render('search-results', {
-            data: data.productos
-        });
-    },
-    /*searchResults: function (req, res) {
-        let search = req.query.search
+    search: function(req,res) {
         productos.findAll({
             include: [{
-                association: 'publicadorProducto'
-            }, {
-                association: 'comentarios'
+                association: "publicadorProducto"
             }],
             where: {
-                [op.or]: [{
-                        nombre: {
-                            [op.like]: `%${search}%`
-                        }
-                    },
-                    {
-                        descripcion: {
-                            [op.like]: `%${search}%`
-                        }
-                    }
+                [op.or]:[
+                    {productName: {[op.like]:`%${req.query.search}%`}},
+                    {descripcion: {[op.like]:`%${req.query.search}%`}}
                 ]
             }
-        }).then(function (unosProductos) {
-            return res.render('search-results', {
-                productos: unosProductos
-            })
         })
-    },*/
+        .then(products => {
+           // res.send(products)
+            res.render('search-results', {productos: products})
+        })
+    },
 }
 module.exports = controller;

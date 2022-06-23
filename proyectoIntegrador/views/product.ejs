@@ -15,9 +15,9 @@
 	<!-- product detail -->
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
-			<h2 class="products-title" <%= productos.productName %></h2> <p class="product-detail-description">
-				<a href="/product/add">Editar</a>
-				</p>
+			<h2 class="products-title"><%= productos.productName %> </h2> 
+			
+			<p class="product-detail-description"><a href="/product/edit/<%= productos.id %>">Editar</a></p>
 		</div>
 		<div class="product-detail">
 			<div class="row">

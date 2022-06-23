@@ -25,4 +25,9 @@ router.get('/detalle/:id', controller.productDetalle);
 
 router.post('/comentario/:id', controller.comentario);
 
+router.get ("/edit/:id", controller.productosEdit)
+
+router.post("/edited/:id", upload.single('imagen'), controller.edited)
+
+
 module.exports = router;
