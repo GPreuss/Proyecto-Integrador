@@ -25,7 +25,7 @@ module.exports = function (sequelize, dataTypes){
 
     const Follower = sequelize.define(alias, cols, config);
 
-    /*UserFollower.associate = function(models){
+    UserFollower.associate = function(models){
         UserFollower.belongsToMany(models.UserFollower, {
         as: "Followers",
         through: "user_follower",
@@ -33,7 +33,7 @@ module.exports = function (sequelize, dataTypes){
         otherKey: "follower_id",
         timestamps: false
         });
-    }*/
+    }
 
     return Follower;
 
