@@ -25,7 +25,7 @@
 					<div class="d-flex align-items-center ">
 					<% if (locals.user) {%>
 					<% if(locals.user.id == usuarios.id){ %>
-					<a href="/users/profile-edit"> Editar perfil <i class="fas fa-cog"></i></a>
+					<a href="/users/edit/<%= usuarios.id %>"> Editar perfil <i class="fas fa-cog"></i></a>
 					<% } else { %>
 					<a href="/users/profile"></a>
 					<form action="/users/follow/<%= usuarios.id %>" method="POST">

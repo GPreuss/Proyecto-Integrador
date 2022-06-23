@@ -18,7 +18,7 @@
 			<h2 class="products-title">Editar mi perfil</h2>
 		</div>
 
-		<form action="/index/register" method="get" class="formulario">
+		<form action="/index/register" method="POST" enctype="multipart/form-data" class="formulario">
 			<input type="text" name="usuario" placeholder="<%= data.nombre %>">
 			<input type="password" name="contraseña" placeholder="<%= data.contrasena %>">
 			<input type="date" name="Fecha de Nacimiento" placeholder="<%= data.fechaNac %>">
