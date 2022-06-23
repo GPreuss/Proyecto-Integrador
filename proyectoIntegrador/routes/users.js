@@ -16,23 +16,10 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage});
 
 /* GET users listing. */
-router.get('/:id', controller.perfil);
+router.get('/profile/:id', controller.profile);
 
 router.get('/edit/:id', controller.editarPerfil);
 
-/*router.post('/profile', upload.single('avatar'), controller.editarPerfil);
-
-router.get('/register', controller.create); //crea el perfil
-
-router.post('/store', upload.single('avatar'), controller.store); //guardo el perfil en la db
-
-router.get('/login',controller.login); 
-
-router.post('/login',controller.signIn);
-
-router.post('/logout',controller.logout);
-
-router.post('/storeFollower', controller.storeFollower);
-*/
+router.post('/follow/:id', controller.follow);
 
 module.exports = router;
