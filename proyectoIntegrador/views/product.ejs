@@ -30,7 +30,7 @@
 					<section class="comments">
 						<% for(let i = 0; i < producto.comentario.length; i++ ) { %>
 						<article>
-							<img src="/images/users<%= producto.comentario[i].avatar%>" alt="">	
+							<img src="/images/users/<%= producto.comentario[i].avatar%>" alt="">	
 							<div class="data">
 								<p class="user">
 									<strong> <a href="/users/profile/<%= producto.comentario[i].id %>"><%= producto.comentario[i].userName %>: </a> </strong>
