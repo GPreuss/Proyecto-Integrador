@@ -1,43 +1,25 @@
 const data = require("../db/data")
 const db = require("../database/models")
 const productos = db.Product;
-const users = db.User
 const comentarios = db.Comentario
-const op = db.Sequelize.Op;//contiene los operadores para usar en metodos de sequelize
-const bcrypt = require('bcryptjs')
+
 
 const controller = {
     productDetalle: function(req, res, next) {
         let id = req.params.id
         console.log(id)
-        productos.findOne({
+        productos.findByPk(id,{
                 include: [{
                     association: "publicadorProducto"
+                }, {
+                    association: "comentario", through:{attributes: ['comentarioTexto', 'createdAt']}
                 }],
-                where: [{
-                    id: id
-                }]
             })
             .then(function (elProducto) {
-                comentarios.findAll( {
-                        include: [{
-                            association: "comentador"
-                        }, {
-                            association: "productoComentado"
-                        }],
-                        where: [{
-                            producto: elProducto
-                        }],
-                            order: [[['id', 'DESC']]]
-                    
-                    })
-                    .then(function (comentarios) {
-                        return res.render('product', {
-                            productos: elProducto,
-                            comentarios: comentarios
-                        })
-                    })
-                    .catch(error => console.log(error))
+                //res.send(elProducto)
+                return res.render('product', {
+                    producto: elProducto.toJSON()
+                })
             })
             .catch(error => console.log(error))    
     },
@@ -83,17 +65,21 @@ const controller = {
     },
 
     productosEdit: function (req, res) {
-        productos.findByPk(req.params.id) //el req.params me trae "id:numero" por eso nos da error.
+        productos.findByPk(req.params.id, {
+            include: [{
+                association: "publicadorProducto"
+            }]
+        }) //el req.params me trae "id:numero" por eso nos da error.
         .then(producto => {
-            return res.render('edit', {producto: producto})
-           
+            //return res.send(producto)
+            return res.render('product-edit', {producto: producto})
         })
 
 },
 
 edited: function(req,res){
     let product = {
-        nombre: req.body.productName,
+        productName: req.body.productName,
         descripcion:req.body.descripcion,
         imagen:req.file.filename,
         publicador: req.session.user.id, // otro error parecido con el id, no encontramos la solucion. 
@@ -104,7 +90,7 @@ edited: function(req,res){
         }
     })
     .then(function (respuesta) {
-        return res.redirect(`/products/${req.params.id}`)
+        return res.redirect(`/product/detalle/${req.params.id}`)
     })
     .catch(error => console.log(error))
 },

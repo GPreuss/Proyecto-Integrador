@@ -24,17 +24,6 @@ module.exports = function (sequelize, dataTypes){
     };
 
     const Follower = sequelize.define(alias, cols, config);
-
-    UserFollower.associate = function(models){
-        UserFollower.belongsToMany(models.UserFollower, {
-        as: "Followers",
-        through: "user_follower",
-        foreignKey: "user_id",
-        otherKey: "follower_id",
-        timestamps: false
-        });
-    }
-
     return Follower;
 
 }

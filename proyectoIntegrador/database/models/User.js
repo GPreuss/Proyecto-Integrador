@@ -45,12 +45,19 @@ module.exports = function (sequelize, dataTypes){
                 as: 'posteos',
                 foreignKey: 'id'
             });
+        User.belongsToMany(models.Product,{
+            through: "comentarios",
+            as: "comentario",
+            foreignKey: 'username'
+        })
+        User.belongsToMany(models.User,{
+            through: "followers",
+            as: "follow",
+            foreignKey: 'sguido',
+            otherKey: 'seguidor',
+            timestamps: false
+        })
 
-        User.hasMany(models.Comentario,
-            {
-                as: 'comentarios',
-                foreignKey: 'id'
-            });
     }
 
 

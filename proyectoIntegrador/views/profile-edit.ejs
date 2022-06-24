@@ -18,13 +18,13 @@
 			<h2 class="products-title">Editar mi perfil</h2>
 		</div>
 
-		<form action="/index/register" method="POST" enctype="multipart/form-data" class="formulario">
-			<input type="text" name="usuario" placeholder="<%= data.nombre %>">
-			<input type="password" name="contraseña" placeholder="<%= data.contrasena %>">
-			<input type="date" name="Fecha de Nacimiento" placeholder="<%= data.fechaNac %>">
-			<input type="number" name="DNI" placeholder="<%= data.DNI %>">
-			<input type="file" name="<%= data.fotoPerfil %>">
-			<button type="submit" title="Ingresar" name="Ingresar"><a href="/users/profile">Registrarse</a></button>
+		<form action="/users/edit/<%= locals.user.id %>" method="POST" enctype="multipart/form-data" class="formulario">
+			<input type="text" name="usuario" value="usuario" placeholder="usuario">
+			<input type="password" name="contrasena" placeholder="<%= locals.user.contrasena %>">
+			<input type="date" name="nacimiento" placeholder="<%= locals.user.fechaNac %>">
+			<input type="number" name="dni" placeholder="<%= locals.user.DNI %>">
+			<input type="file" name="foto">
+			<button type="submit" title="Ingresar" name="Ingresar">Modificar Usuario</a></button>
 		</form>
 	</div>
 

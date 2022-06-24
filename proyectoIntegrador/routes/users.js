@@ -20,6 +20,8 @@ router.get('/profile/:id', controller.profile);
 
 router.get('/edit/:id', controller.editarPerfil);
 
+router.post('/edit/:id', upload.single('foto'), controller.edit);
+
 router.post('/follow/:id', controller.follow);
 
 module.exports = router;

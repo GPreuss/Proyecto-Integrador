@@ -1,4 +1,3 @@
-const data = require("../db/data")
 const db = require("../database/models")
 const productos = db.Product;
 const users = db.User
@@ -8,7 +7,7 @@ const bcrypt = require('bcryptjs')
 const controller = {
     index: function (req, res) {
         productos.findAll({
-            include: [{association: 'publicadorProducto'},{association: 'comentarios'}],order: [['createdAt','ASC']]
+            include: [{association: 'publicadorProducto'}],order: [['createdAt','ASC']]
         })
         .then(productos => {
             return res.render('index', {
@@ -17,9 +16,6 @@ const controller = {
         })
 
         .catch(error => console.log(error))
-    },
-    login: function (req, res, next) {
-        res.render('login');
     },
     create: function (req, res) {
         console.log(users)
@@ -69,7 +65,6 @@ const controller = {
                 .catch(errors => console.log(errors))
         }
     },
-
     login: function (req, res) {
         //mostrar el form de registro
         //Chequear que un usario esté logueado
@@ -90,7 +85,6 @@ const controller = {
 
         return res.redirect('/');
     },
-
     signIn: function (req, res) {
 
         let errores = {}
@@ -130,8 +124,6 @@ const controller = {
                 //return res.redirect('/')
             })
             .catch(error => console.log(error))
-
-
     },
     search: function(req,res) {
         productos.findAll({

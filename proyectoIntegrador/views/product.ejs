@@ -15,31 +15,31 @@
 	<!-- product detail -->
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
-			<h2 class="products-title"><%= productos.productName %> </h2> 
+			<h2 class="products-title"><%= producto.productName %> </h2> 
 			
-			<p class="product-detail-description"><a href="/product/edit/<%= productos.id %>">Editar</a></p>
+			<p class="product-detail-description"><a href="/product/edit/<%= producto.id %>">Editar</a></p>
 		</div>
 		<div class="product-detail">
 			<div class="row">
 				<article class="col-12 col-lg-8 product-detail-info">
-					<img src="/images/products/<%= productos.imagen %>" alt="" class="product-detail-img">
+					<img src="/images/products/<%= producto.imagen %>" alt="" class="product-detail-img">
 					<p class="product-detail-description">
-						<%= productos.descripcion %></p>
+						<%= producto.descripcion %></p>
 				</article>
 				<div class="col-12 col-lg-4">
 					<section class="comments">
-						<% for(let i = 0; i < comentarios.length; i++ ) { %>
+						<% for(let i = 0; i < producto.comentario.length; i++ ) { %>
 						<article>
-							<img src="/images/users<%= comentarios[i].username.avatar%>" alt="">
+							<img src="/images/users<%= producto.comentario[i].avatar%>" alt="">	
 							<div class="data">
 								<p class="user">
-									<strong> <a href="/users/profile/<%= comentarios[i].usuario.id %>"><%= comentarios[i].username.userName %>: </a> </strong>
-									<%= comentarios[i].comentarioTexto %></p>
+									<strong> <a href="/users/profile/<%= producto.comentario[i].id %>"><%= producto.comentario[i].userName %>: </a> </strong>
+									<%= producto.comentario[i].comentarios.comentarioTexto %></p>
 							</div>
 						</article>
 						<% } %>
 					</section>
-					<form class="form" action="/product/comentario/<%= productos.id %>" method="POST">
+					<form class="form" action="/product/comentario/<%= producto.id %>" method="POST">
 						<input class="form-input" type="text" name= texto value="" placeholder="Agregar comentario">
 						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
 					</form>

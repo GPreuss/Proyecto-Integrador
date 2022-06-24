@@ -24,16 +24,16 @@
 				</div>
 					<div class="d-flex align-items-center ">
 					<% if (locals.user) {%>
-					<% if(locals.user.id == usuarios.id){ %>
-					<a href="/users/edit/<%= usuarios.id %>"> Editar perfil <i class="fas fa-cog"></i></a>
-					<% } else { %>
-					<a href="/users/profile"></a>
-					<form action="/users/follow/<%= usuarios.id %>" method="POST">
-						<button class="btn mt-3 ml-4" type="submit" name="seguir">Seguir / dejar de seguir</button>
-						<% }  %>
+						<% if(locals.user.id == usuarios.id){ %>
+							<a href="/users/edit/<%= usuarios.id %>"> Editar perfil <i class="fas fa-cog"></i></a>
 						<% } else { %>
-						<a href="/users/profile"></a>
+							<a href="/users/profile"></a>
+							<form action="/users/follow/<%= usuarios.id %>" method="POST">
+							<button class="btn mt-3 ml-4" type="submit" name="seguir">Seguir / dejar de seguir</button>
 						<% }  %>
+					<% } else { %>
+						<a href="/users/profile"></a>
+					<% }  %>
 					</form>
 				</div>
 				<div>
